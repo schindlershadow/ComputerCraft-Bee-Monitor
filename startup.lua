@@ -94,7 +94,7 @@ while true do
     local raining = env.isRaining()
     local thundering = env.isThunder()  -- <-- corrected API
     local bees, injured = scanBees(16)
-    mon.clear()
+    
 
     if day then
         if raining then
@@ -105,6 +105,7 @@ while true do
         else
             mon.setBackgroundColor(colors.black)
     end
+    mon.clear()
     centerText(2, "Bee Environment Status", colors.yellow)
     centerText(4, "Time: " .. (day and "Day" or "Night"), day and colors.orange or colors.blue)
     centerText(6, "Raining: " .. (raining and "Yes" or "No"), raining and colors.lightBlue or colors.gray)
@@ -115,7 +116,9 @@ while true do
         centerText(10, ("Bees nearby: %d"):format(bees), colors.yellow)
     end
     if injured then
-        centerText(11, "⚠ Some bees are hurt! ⚠", colors.red)
+        centerText(11, "Some bees are hurt!", colors.red)
+    elseif bees ~= 0 then
+        centerText(11, "The bees are happy", colors.yellow)
     end
 
     sleep(2) -- refresh every 2 seconds
